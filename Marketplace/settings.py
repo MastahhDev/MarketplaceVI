@@ -101,6 +101,25 @@ DATABASES = {
 }
 
 
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": "694371422700-ui3rkj63ht8num74kk28mcrpiesohl1d.apps.googleusercontent.com",      # si preferís cargar desde settings en vez de admin
+            "secret": "GGOCSPX-snnF_7tMeNg5-_VicUZJcXvYdUvK",
+        },
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+    },
+    "github": {
+        "APP": {
+            "client_id": "Ov23lihIm44axIkIAxlz",
+            "secret": "38addd323b6ff4eff92a8fbbf894986341d71eba",
+        },
+        "SCOPE": ["user:email"],
+    },
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
