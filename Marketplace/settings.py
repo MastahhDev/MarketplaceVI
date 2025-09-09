@@ -53,9 +53,11 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_SINGUP_FIELDS = ["email", "username", "password1", "password2"]
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+ACCOUNT_LOGIN_METHODS = {"email", "username"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
 # =====================================================================
 
 MIDDLEWARE = [
@@ -66,7 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware' # Requerido por el allauth, añadido
+    'allauth.account.middleware.AccountMiddleware', # Requerido por el allauth, añadido
 ]
 
 ROOT_URLCONF = 'Marketplace.urls'
@@ -74,7 +76,7 @@ ROOT_URLCONF = 'Marketplace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"], # IMPORTANTE para que tome los templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,12 +102,12 @@ DATABASES = {
     }
 }
 
-
+#============================
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "694371422700-ui3rkj63ht8num74kk28mcrpiesohl1d.apps.googleusercontent.com",      # si preferís cargar desde settings en vez de admin
-            "secret": "GGOCSPX-snnF_7tMeNg5-_VicUZJcXvYdUvK",
+            "client_id": "",      # si preferís cargar desde settings en vez de admin
+            "secret": "",
         },
         "SCOPE": ["profile", "email"],
         "AUTH_PARAMS": {"access_type": "online"},
@@ -118,7 +120,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "SCOPE": ["user:email"],
     },
 }
-
+#============================
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
