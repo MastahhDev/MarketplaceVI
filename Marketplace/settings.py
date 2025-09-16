@@ -53,9 +53,6 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-ACCOUNT_SINGUP_FIELDS = ["email", "username", "password1", "password2"]
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-
 ACCOUNT_LOGIN_METHODS = {"email", "username"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
 # =====================================================================
@@ -84,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request', # Requerido por el allauth, añadido
+                'django.template.context_processors.csrf', # solo para formularios
             ],
         },
     },
@@ -106,8 +104,8 @@ DATABASES = {
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "",      # si preferís cargar desde settings en vez de admin
-            "secret": "",
+            "client_id": "919989255582-59fgcra1krjtgjpstce98qi384v2valu.apps.googleusercontent.com",      # si preferís cargar desde settings en vez de admin
+            "secret": "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",
         },
         "SCOPE": ["profile", "email"],
         "AUTH_PARAMS": {"access_type": "online"},
@@ -157,6 +155,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

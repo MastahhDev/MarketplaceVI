@@ -1,20 +1,45 @@
+<!-- templates\account\login.html -->
 {% extends "base.html" %}
+
 {% load socialaccount %}
 
-{% block title  %}Entrar{% endblock %}
-
 {% block content %}
-<h2>Entrar</h2>
+  <h2>Iniciar sesión</h2>
 
-<form method="post">
+  <!-- Login tradicional con usuario/contraseña -->
+  <form method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
+    <div class="form-group">
+      {{ form.login.label_tag }}
+      {{ form.login }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
 
-<p>O entrar con:</p>
-<a href="{% provider_login_url 'google' %}"><img src="/static/google-logo.png" width="30">Google</a>
-<a href="{% provider_login_url 'github' %}"><img src="/static/github-logo.png" width="30">Github</a>
+    <button type="submit" class="btn-primary">Ingresar</button>
+  </form>
 
-<p>¿No tenes cuenta? <a href="{% url 'account_signup' %}">Registrate</a></p>
+  <hr>
+  
+  <!-- Links para resetear contraseña y registrarse -->
+  <p class="auth-links">
+    <a href="{% url 'account_reset_password' %}">¿Olvidaste tu contraseña?</a><br>
+    ¿No tenés cuenta?
+    <a href="{% url 'account_signup' %}">Registrate</a>
+  </p>
+  
+  <!-- Botones sociales -->
+  <h3>O ingresa con</h3>
+  <div class="social-login">
+        <a href="{% provider_login_url 'google' %}" role="button" class="btn-social">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="{% provider_login_url 'github' %}" role="button" class="btn-social">
+            <i class="fab fa-github"></i>
+        </a>
+  </div>    
+
+
 {% endblock %}
